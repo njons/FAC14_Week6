@@ -1,12 +1,12 @@
 // what do we need to create a server
 const http = require('http');
-const port = process.env.PORT || 3000;
-const hostname = process.env.HOSTNAME || 'localhost';
 // what code do we need to access?
-const routes = require('./routes');
+const router = require('./router');
 
+const server = http.createServer(router);
+const port = process.env.PORT || 3000;
+const host = process.env.HOST || 'localhost';
 
-const server = http.createServer(routes);
 server.listen(port, () => {
-  console.log(`sever is sunning at: http://${hostname}:${port}`);
-})
+  console.log(`server is running at: http://${host}:${port}`);
+});

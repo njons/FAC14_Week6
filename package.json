@@ -6,7 +6,7 @@
   "scripts": {
     "test": "nyc tape test/*.js | tap-spec",
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
-    "start": "node ./src/server.js"
+    "start": "nodemon ./src/server.js"
   },
   "repository": {
     "type": "git",
