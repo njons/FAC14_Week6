@@ -11,8 +11,8 @@ const publicFilesRoute = (response, filename) => {
   fs.readFile(path.join(__dirname, '..', 'public', filename), (err, file) => {
     const fileType = path.extname(filename);
     const mimeType = {
-      'html': 'text/html',
-      'css': 'text/css',
+      '.html': 'text/html',
+      '.css': 'text/css',
       '.ico': 'image/x-icon',
       '.js': 'application/javascript',
       '.json': 'application/json',
@@ -21,12 +21,19 @@ const publicFilesRoute = (response, filename) => {
       '.gif': 'image/gif',
       '.png': 'image/png',
       '.svg': 'image/svg+xml',
-    }
+    };
+
+
     if(err) {
-      response.writeHead(500, { 'content-type': 'text/plain' });
-      response.end('Error with request');
+      response.writeHead(404, { 'content-type': 'text/plain' });
+      response.end('File not found');
     } else {
-      response.writeHead(200, { 'content-type': 'fileType[mimeType]' });
+      console.log(fileType)
+      console.log(mimeType)
+      console.log(mimeType[fileType])
+      // response.writeHead(404, { 'Content-Type': 'text/plain' });
+      // response.end('File not found');
+      response.writeHead(200, { 'content-type': mimeType[fileType] });
       response.end(file);
     }
   });

@@ -4,18 +4,23 @@ const path = require('path');
 const { publicFilesRoute, getDataRoute, postDataRoute } = require('./handler');
 
 const router = (request, response) => {
-  const url = request.url;
-  console.log('this is the current url', url)
+  console.log('this is the current url:', request.url)
 
-  if (url === '/') {
+  if (request.url === '/') {
     publicFilesRoute(response, 'index.html');
-  } else if (url === '/about') {
+  } else if (request.url === '/about') {
     publicFilesRoute(response, 'about.html');
-  } else if (url === '/getData') {
+  } else if (request.url === '/getData') {
     getDataRoute(request, response);
-  } else if (url === '/postData') {
+  } else if (request.url === '/postData') {
     postDataRoute(request, response);
+  } else if (request.url === '/css/main.css') {
+    publicFilesRoute(response, '/css/main.css');
   } else {
+    // console.log('request url', request.url)
+    // console.log()
+    // publicFilesRoute(response, '/css/main.css');
+    // publicFilesRoute(request, request.url);
     response.writeHead(404, { 'Content-Type': 'text/plain' });
     response.end('File not found');
   }
