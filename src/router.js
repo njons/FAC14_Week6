@@ -1,7 +1,7 @@
 // what do we need to create the routes
 const path = require('path');
 // what code do we need to access?
-const { homeRoute, publicFilesRoute } = require('./handler');
+const { homeRoute, publicFilesRoute, postData } = require('./handler');
 
 const router = (request, response) => {
   console.log('this is the current url:', request.url)
@@ -10,6 +10,8 @@ const router = (request, response) => {
     homeRoute(request, response);
   } else if (url.includes('/public/')) {
     publicFilesRoute(request, response, url);
+  } else if (url.includes('/create-user')) {
+    postDataRoute(err, data);
   } else {
     response.writeHead(404, "Content-Type: text/html");
     response.end("<h1>404 not found</h1>");

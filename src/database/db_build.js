@@ -10,11 +10,10 @@ const sql = fs.readFileSync(`${__dirname}/db_build.sql`).toString();
 
 // write the function to build the database
 const runDbBuild = (cb) => {
-  dbConnection.query(sql, (err, result) => {
+  dbConnection.query(sql, (err, data) => {
     if (err) cb(err);
-    cb(null, result);
+    cb(null, data);
   });
 }
-
 
 module.exports = runDbBuild;
