@@ -23,7 +23,7 @@ img {
 }
 
 h1 {
-    font-size: calc(1rem + 3vw);
+  font-size: calc(1rem + 3vw);
 }
 
 h1,
@@ -73,4 +73,10 @@ span {
 
 span:hover {
   background-color: Cornsilk;
+}
+
+li {
+  background-color: #F7DF3E;
+  padding: 0 5px;
+  font-size: calc(1rem + 3vw);
 }

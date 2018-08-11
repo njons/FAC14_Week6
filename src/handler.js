@@ -5,6 +5,7 @@
 // what do we need to create the handlers
 const fs = require('fs');
 const path = require('path');
+const queryString = require('querystring');
 
 // what code do we need to accsess?
 const postData = require('./queries/postData');
@@ -41,7 +42,6 @@ const publicFilesRoute = (request, response, url) => {
       response.writeHead(500, {'content-type': 'text/html'});
       response.end('Something went wrong');
     } else {
-      console.log(fileType)
       response.writeHead(200, `Content-Type: ${mimeType[fileType]}`);
       response.end(file);
     }
@@ -50,20 +50,34 @@ const publicFilesRoute = (request, response, url) => {
 
 const postDataRoute = (request, response) => {
   let data = "";
-  request.on ('data', (chunk) => {
+  request.on('data', (chunk) => {
     data += chunk;
   })
-
-  postData((err, data) => {
-      if (err) {
-        response.writeHead(500, {'content-type':'text/html'});
-        response.end('Something went wrong with the server')
-      } else {
-        response.writeHead(200, {'content-type':'text/html'});
-        response.end(JSON.stringify(data))
-      }
-
+  request.on('end', function() {
+    console.log('this is the post data from the browser:', queryString.parse(data))
+    const name = queryString.parse(data).name;
+    const birthdate = queryString.parse(data).birth;
+      postData(name, birthdate, (err, data) => {
+        if (err) {
+          response.writeHead(500, {'content-type':'text/html'});
+          response.end('Something went wrong with the server');
+          console.log('this is the post data from the browser:', err);
+        } else {
+          response.writeHead(200, {'content-type':'text/html'});
+          fs.readFile(path.join(__dirname, '..', 'public', 'index.html'), (error, file) => {
+            if (error) {
+              console.log(error)
+              return;
+            } else {
+              response.end(file);
+            }
+          })
+        }
+      })
   })
+
+
+
 }
 
 

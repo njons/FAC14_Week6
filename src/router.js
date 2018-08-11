@@ -16,18 +16,6 @@ const router = (request, response) => {
     response.writeHead(404, "Content-Type: text/html");
     response.end("<h1>404 not found</h1>");
   }
-  // } else if (request.url === '/about') {
-  //   publicFilesRoute(response, 'about.html');
-  // } else if (request.url === '/getData') {
-  //   getDataRoute(request, response);
-  // } else if (request.url === '/postData') {
-  //   postDataRoute(request, response);
-  // } else if (request.url === '/css/main.css') {
-  //   publicFilesRoute(response, '/css/main.css');
-  // } else {
-  //   response.writeHead(404, { 'Content-Type': 'text/plain' });
-  //   response.end('File not found');
-  // }
 }
 
 module.exports = router;
