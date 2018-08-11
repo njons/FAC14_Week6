@@ -1,5 +1,4 @@
 //console.log('this is dom.js');
-
 const months = {
   '1': 'January',
   '2': 'February',
@@ -44,9 +43,17 @@ const submit = document.getElementsByTagName("button");
 submit[0].addEventListener('click', function(e){
   console.log('you clicked the button')
   e.preventDefault();
-  getRandomDate()
+  var finalDate = getRandomDate()
 
-  
+
+  const ul = document.getElementsByTagName('ul');
+  const results = document.createElement('li')
+  results.innerText = finalDate;
+  ul[0].appendChild(results);
+
+  console.log('this is final date:', finalDate)
+
+
 
 
 })
