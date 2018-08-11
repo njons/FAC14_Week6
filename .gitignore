@@ -28,3 +28,6 @@ config.env
 
 # DS_Store
 .DS_Store
+
+# text files
+text_content.md

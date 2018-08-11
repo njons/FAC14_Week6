@@ -6,25 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="public/css/reset.css">
     <link rel="stylesheet" type="text/css" href="public/css/main.css">
-
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
   </head>
   <body>
+    <main>
+      <h1>My body is frightened, but I am not</h1>
 
-  <form method="POST">
-    <label for="name">Whats your name?</label>
-    <input id="name" type="text" name="name" placeholder="Name" value="Nathalie"></input>
-    <label for="email">Whats your email?</label>
-    <input name="email" type="email" id="email" value="nathalie@jonsson.com" ></input>
-    <label for="birth">When were you born?</label>
-    <input name="birth" type="date" id="birth" value="1984-11-13"></input>
-  </form>
+      <form method="POST" action="/get-date">
+        <label for="name">What's your name?</label>
+        <input id="name" type="text" name="name" placeholder="Name" value="Nathalie"></input>
+        <label for="birth">When were you born?</label>
+        <input name="birth" type="date" id="birth" value="1984-11-13"></input>
+      </form>
 
-    <p>This is the home page for the HelloWorld Web application. </p>
-    <p>To prove that they work, you can execute either of the following links:
-    <ul>
-      <li>To a <a href="hello">servlet</a>.
-    </ul>
+      <p>Get ready to find out what date you will perish</p>
 
+      <ul>
+        <li>Result here!</li>.
+      </ul>
+
+    </main>
   </body>
   <script src="/public/js/dom.js"></script>
   <script src="/public/js/script.js"></script>
