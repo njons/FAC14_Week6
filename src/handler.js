@@ -49,6 +49,11 @@ const publicFilesRoute = (request, response, url) => {
 }
 
 const postDataRoute = (request, response) => {
+  let data = "";
+  request.on ('data', (chunk) => {
+    data += chunk;
+  })
+
   postData((err, data) => {
       if (err) {
         response.writeHead(500, {'content-type':'text/html'});
@@ -65,4 +70,4 @@ const postDataRoute = (request, response) => {
 
 
 
-module.exports = { homeRoute, publicFilesRoute };
+module.exports = { homeRoute, publicFilesRoute, postDataRoute };
