@@ -6,39 +6,44 @@
 const fs = require('fs');
 const path = require('path');
 
-// refactored function to serve files in the public (all types) for '/' and '/about'
-const publicFilesRoute = (response, filename) => {
-  fs.readFile(path.join(__dirname, '..', 'public', filename), (err, file) => {
-    const fileType = path.extname(filename);
-    const mimeType = {
-      '.html': 'text/html',
-      '.css': 'text/css',
-      '.ico': 'image/x-icon',
-      '.js': 'application/javascript',
-      '.json': 'application/json',
-      '.jpg': 'image/jpeg',
-      '.jpeg': 'image/jpeg',
-      '.gif': 'image/gif',
-      '.png': 'image/png',
-      '.svg': 'image/svg+xml',
-    };
-
-
-    if(err) {
-      response.writeHead(404, { 'content-type': 'text/plain' });
-      response.end('File not found');
+// the root of the site
+const homeRoute = (request, response) => {
+  fs.readFile(path.join(__dirname, '..', 'public', 'index.html'), (err, file) => {
+    if (err) {
+      response.writeHead(500, {'content-type': 'text/html'});
+      response.end('Something went wrong');
     } else {
-      console.log(fileType)
-      console.log(mimeType)
-      console.log(mimeType[fileType])
-      // response.writeHead(404, { 'Content-Type': 'text/plain' });
-      // response.end('File not found');
-      response.writeHead(200, { 'content-type': mimeType[fileType] });
+      response.writeHead(200, {'content-type':'text/html'});
       response.end(file);
     }
   });
+}
 
+const publicFilesRoute = (request, response, url) => {
+  const fileType = url.split('.')[1];
+  const mimeType = {
+    '.html': 'text/html',
+    '.css': 'text/css',
+    '.ico': 'image/x-icon',
+    '.js': 'application/javascript',
+    '.json': 'application/json',
+    '.jpg': 'image/jpeg',
+    '.jpeg': 'image/jpeg',
+    '.gif': 'image/gif',
+    '.png': 'image/png',
+    '.svg': 'image/svg+xml',
+  };
+  fs.readFile(path.join(__dirname, '..', request.url), (err, file) => {
+    if (err) {
+      response.writeHead(500, {'content-type': 'text/html'});
+      response.end('Something went wrong');
+    } else {
+      console.log(fileType)
+      response.writeHead(200, `Content-Type: ${mimeType[fileType]}`);
+      response.end(file);
+    }
+  });
 }
 
 
-module.exports = { publicFilesRoute };
+module.exports = { homeRoute, publicFilesRoute };
