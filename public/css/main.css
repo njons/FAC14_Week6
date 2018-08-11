@@ -1,9 +1,15 @@
+/* dark grey: #1B1B26 */
+/* yellow: #F7DF3E */
+/* beige: #F1E2D0 */
+
+
+
 body {
   height: 100vh;
-  background: yellow;
+  background: Cornsilk;
   font-family: 'Playfair Display', serif;
   font-size: calc(1rem + 2vw);
-  color: black;
+  color: #1B1B26;
 }
 
 main {
@@ -38,6 +44,6 @@ input {
   color: black;
   border: none;
   border-bottom: 2px solid black;
-  background: transparent;
+  background-color: transparent;
   outline: none;
 }
