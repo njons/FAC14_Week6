@@ -11,3 +11,11 @@ tape("tape is working", t => {
   t.equals(1, 1, "one equals one");
   t.end();
 });
+
+
+tape('test that no error is triggered when database is created', (t)=> {
+  runDbBuild(function(err, res){
+    t.equals(err, null, "no error was triggered when creating the database");
+    t.end();
+  })
+})

@@ -7,13 +7,12 @@ const dbConnection = require('./db_connection');
 
 // start by reading the SQL file and converting it into a string
 const sql = fs.readFileSync(`${__dirname}/db_build.sql`).toString();
-console.log(sql)
 
 // write the function to build the database
 const runDbBuild = (cb) => {
   dbConnection.query(sql, (err, result) => {
     if (err) cb(err);
-    cb(result);
+    cb(null, result);
   });
 }
 
