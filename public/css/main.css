@@ -65,4 +65,9 @@ button:hover {
 
 span {
   background-color:#F7DF3E;
+  padding: 0 5px;
+}
+
+span:hover {
+  background-color: Cornsilk;
 }
