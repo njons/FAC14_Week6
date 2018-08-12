@@ -12,7 +12,7 @@ function getRandomYear(){
 }
 
 function getRandomMonthNum() {
-  var monthNum = getRandomInt(1, 12);
+  var monthNum = getRandomInt(01, 12);
   return monthNum;
 }
 
@@ -38,9 +38,9 @@ function getRandomMonthWord() {
 
 function getRandomDay() {
   var monthNum = getRandomMonthNum();
-  if (monthNum === 2) {
+  if (monthNum === 02) {
     return getRandomInt(1, 28);
-  } else if (monthNum === 4 || monthNum === 6 ||  monthNum === 9 || monthNum === 11) {
+  } else if (monthNum === 04 || monthNum === 06 ||  monthNum === 09 || monthNum === 11) {
     return  getRandomInt(1, 30);
   } else {
     return getRandomInt(1, 31);
