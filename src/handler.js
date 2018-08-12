@@ -57,6 +57,8 @@ const postDataRoute = (request, response) => {
     console.log('this is the post data from the browser:', queryString.parse(data))
     const name = queryString.parse(data).name;
     const birthdate = queryString.parse(data).birth;
+    const deathdate = queryString.parse(data).death;
+    console.log(deathdate);
       postData(name, birthdate, (err, data) => {
         if (err) {
           response.writeHead(500, {'content-type':'text/html'});

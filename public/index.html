@@ -12,16 +12,19 @@
     <main>
       <img src="public/img/obituary.png">
       <h1>My body is frightened, but I am not</h1>
-      <ul> <!--result will display here--> </ul>
-      <form method="POST" action="/create-user" id="details" >
+
+      <div id="results"> <!--result will display here--> </div>
+
+      <form method="POST" action="/create-user" id="details">
         <label for="name">What's your name?</label>
-        <input id="name" type="text" name="name" placeholder="Name" value="Nathalie"></input>
+        <input name="name" type="text" id="name"  value="Nathalie"></input>
+
         <label for="birth">When were you born?</label>
         <input name="birth" type="date" id="birth" value="1984-11-13"></input>
+        <input name="death" type="hidden" id="death" value="1985-11-16"></input>
+
         <button type="submit" form="details">Click <span>here</span> to find out on what date you will perish</button>
       </form>
-
-
 
     </main>
   </body>
