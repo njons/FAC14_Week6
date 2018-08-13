@@ -13,20 +13,23 @@ function getRandomYear(){
 
 function getRandomMonthNum() {
   var monthNum = getRandomInt(01, 12);
+  if (monthNum > 10) {
+    monthNum =+ "0" + monthNum;
+  }
   return monthNum;
 }
 
 function getRandomMonthWord() {
   const months = {
-    '1': 'January',
-    '2': 'February',
-    '3': 'March',
-    '4': 'April',
-    '5': 'May',
-    '6': 'June',
-    '7': 'July',
-    '8': 'August',
-    '9': 'September',
+    '01': 'January',
+    '02': 'February',
+    '03': 'March',
+    '04': 'April',
+    '05': 'May',
+    '06': 'June',
+    '07': 'July',
+    '08': 'August',
+    '09': 'September',
     '10': 'October',
     '11': 'November',
     '12': 'December'
@@ -84,6 +87,8 @@ submit[0].addEventListener('click', function(e){
   const death = document.getElementById('death');
   death.setAttribute('value', dateNum);
 
+
+  getData(data.death);
 
 
   console.log('this is dateNum:', dateNum);

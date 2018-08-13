@@ -77,11 +77,15 @@ button:hover {
 
 span {
   background-color:#F7DF3E;
-  padding: 0 5px;
+  padding: 0 5px 4px;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  display: inline-block;
 }
 
 span:hover {
-  background-color: Cornsilk;
+  border-color: transparent;
+  background-color: transparent;
 }
 
 li {
