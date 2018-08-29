@@ -2,7 +2,7 @@
 const dbConnection = require('../database/db_connection');
 
 const getData = (name, birthdate, cb) => {
-  const sql = 'SELECT deathdate FROM users WHERE `name` = $name AND `birthdate` = $birthdate;';
+  const sql = `SELECT deathdate FROM users WHERE "name" = $name AND "birthdate" = $birthdate;`;
   dbConnection.query(sql, [name, birthdate], (err, data) => {
     console.log(data.rows)
     console.log('this is err', err);
@@ -11,6 +11,5 @@ const getData = (name, birthdate, cb) => {
     cb(null, data.rows);
   })
 }
-
 
 module.exports = getData;

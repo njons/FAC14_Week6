@@ -65,6 +65,7 @@ function getRandomDateString() {
   var dateString = 'Your date is ' + day + ' ' + month + ' ' + year;
   return dateString;
 }
+
 // call the function that return the full string
 var dateString = getRandomDateString();
 var dateNum = getRandomDateNum();
@@ -75,7 +76,9 @@ const submit = document.getElementsByTagName("button");
 submit[0].addEventListener('click', function(e){
   console.log('you clicked the button')
   // stop page from reloading
-  // e.preventDefault();
+  e.preventDefault();
+
+  apiRequest(url, callback)
 
   // create div displaying result
   const div = document.getElementsByTagName('div');
@@ -91,6 +94,14 @@ submit[0].addEventListener('click', function(e){
   getData(data.death);
 
 
+
   console.log('this is dateNum:', dateNum);
 
 })
+
+//
+var name = input[0].value;
+console.log('this is name ', name)
+var birthdate = ;
+
+var url = '/getData?name='+ name + '&birthdate=' + birthdate;
