@@ -60,23 +60,16 @@ const postDataRoute = (request, response) => {
     const name = queryString.parse(data).name;
     const birthdate = queryString.parse(data).birth;
     const deathdate = queryString.parse(data).death;
-    console.log(deathdate);
       postData(name, birthdate, deathdate, (err, data) => {
         if (err) {
           response.writeHead(500, {'content-type':'text/html'});
           response.end('Something went wrong with the server');
           console.log('this is the post data from the browser:', err);
         } else {
-          // response.writeHead(302, { 'Content-Type': 'location', 'Location': '/'});
-          // return response.end('Success');
-          response.writeHead(200, {'content-type':'text/html'});
-          fs.readFile(path.join(__dirname, '..', 'public', 'index.html'), (error, file) => {
-            if (error) {
-              return;
-            } else {
-              response.end(file);
-            }
-          })
+          // response.writeHead(200, { 'content-type': 'application/json' });
+          // response.end(JSON.stringify(data));
+          response.writeHead(302, { 'Content-Type': 'location', 'Location': '/'});
+          return response.end(JSON.stringify(data));
         }
       })
   })
@@ -84,8 +77,15 @@ const postDataRoute = (request, response) => {
 
 const getDataRoute = (request, response) => {
   getData((err, data) => {
-    console.log('this is the data from the database:', data)
-    console.log('this is the convereted data form the database', JSON.stringify(data))
+    if (err) {
+      response.writeHead(500, { 'content-type': 'text/plain' });
+      response.end('Error with request');
+    } else {
+      response.writeHead(302, { 'Content-Type': 'location', 'Location': '/'});
+      return response.end(JSON.stringify(data));
+      // response.writeHead(200, { 'content-type': 'application/json' });
+      // response.end(JSON.stringify(data));
+    }
   })
 }
 

@@ -1,28 +1,28 @@
 // ESTABLISH A CONNECTION TO DATABASE: node cannot just run sql so we will need to connect to the database here and run the code to build the datbase in yet another file
 
 // what do we need to establish a connection with the database?
-const { Pool } = require('pg');
-const url = require('url');
-require('env2')('./config.env');
-
+const { Pool } = require("pg");
+const url = require("url");
+require("env2")("./config.env");
 
 // make sure tehre is a DB_URL
-if (!process.env.DB_URL) throw new Error('USERS_DB_URL environment variable must be set');
+if (!process.env.DB_URL)
+  throw new Error("USERS_DB_URL environment variable must be set");
 
 // break down the DB_URL into params to populate the options object
 const params = url.parse(process.env.DB_URL);
 // get the username and password from the DB_URL
-const [username, password] = params.auth.split(':');
+const [username, password] = params.auth.split(":");
 
 // fill the options object with info importnat to establish a connection with the db
 const options = {
   host: params.hostname,
   port: params.port,
-  database: params.pathname.split('/')[1],
+  database: params.pathname.split("/")[1],
   max: process.env.DB_URL_CONNECTIONS || 2,
   user: username,
   password,
-  ssl: params.hostname !== 'localhost'
-}
+  ssl: params.hostname !== "localhost"
+};
 
 module.exports = new Pool(options);
