@@ -52,28 +52,23 @@ const publicFilesRoute = (request, response, url) => {
   });
 };
 
-const postDataRoute = (request, response) => {
+const postDataRoute = (request, response, url) => {
   let data = "";
   request.on("data", chunk => {
     data += chunk;
   });
   request.on("end", function() {
-    console.log(
-      "this is the post data from the browser:",
-      queryString.parse(data)
-    );
-    const name = queryString.parse(data).name;
-    const birthdate = queryString.parse(data).birth;
-    const deathdate = queryString.parse(data).death;
+    url = url.split("?")[1];
+    const name = queryString.parse(url).name;
+    const birthdate = queryString.parse(url).birth;
+    const deathdate = queryString.parse(url).death;
+    console.log("this is the deathdate: ", deathdate);
     postData(name, birthdate, deathdate, (err, data) => {
       if (err) {
         response.writeHead(500, { "content-type": "text/html" });
         response.end("Something went wrong with the server");
-        console.log("this is the post data from the browser:", err);
       } else {
-        // response.writeHead(200, { 'content-type': 'application/json' });
-        // response.end(JSON.stringify(data));
-        response.writeHead(302, { "Content-Type": "location", Location: "/" });
+        response.writeHead(200, { "content-type": "application/json" });
         response.end(JSON.stringify(data));
       }
     });

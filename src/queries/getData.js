@@ -8,7 +8,7 @@ const getData = (name, birth, cb) => {
     console.log(data);
     console.log("this is err", err);
     if (err) return cb(err);
-    console.log("this is the data from the database", data.rows[0].deathdate);
+    console.log("this is the data from the database", data.rows);
     cb(null, data.rows);
   });
 };
