@@ -15,7 +15,7 @@ CREATE TABLE users (
   -- set data type for the birthdate
   birthdate DATE NOT NULL,
   -- set data type for the deathdate
-  deathdate VARCHAR(10) NOT NULL
+  deathdate VARCHAR(10) UNIQUE NOT NULL
 );
 
 INSERT INTO users (name, birthdate, deathdate) VALUES
