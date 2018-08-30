@@ -21,7 +21,6 @@
   "homepage": "https://github.com/njons/FAC14_Week6#readme",
   "devDependencies": {
     "codecov": "^3.0.4",
-    "env2": "^2.2.2",
     "eslint": "^5.3.0",
     "eslint-config-node": "^3.0.0",
     "eslint-config-prettier": "^2.9.0",
@@ -31,5 +30,8 @@
     "supertest": "^3.1.0",
     "tap-spec": "^5.0.0",
     "tape": "^4.9.1"
+  },
+  "dependencies": {
+    "env2": "^2.2.2"
   }
 }
