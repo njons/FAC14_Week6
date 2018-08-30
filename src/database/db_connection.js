@@ -11,12 +11,13 @@ if (process.env.NODE_ENV === "test") {
   DB_URL = process.env.TEST_DB_URL;
 }
 
+console.log("this is DB_URL:", DB_URL);
 // make sure there is a DB_URL
 if (!process.env.DB_URL)
   throw new Error("DB_URL environment variable must be set");
 
 // break down the DB_URL into params to populate the options object
-const params = url.parse(process.env.DB_URL);
+const params = url.parse(DB_URL);
 // get the username and password from the DB_URL
 const [username, password] = params.auth.split(":");
 
