@@ -2,6 +2,10 @@
 /* yellow: #F7DF3E */
 /* beige: #F1E2D0 */
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   height: 100vh;
   background: Cornsilk;
@@ -15,6 +19,7 @@ body {
 }
 
 a {
+  display: flex;
   font-size: calc(1rem + 1.75vw);
   text-decoration: none;
   color: #1b1b26;
