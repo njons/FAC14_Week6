@@ -84,50 +84,66 @@ function renderDate(date) {
 
   // create div displaying result
   results.innerText = dateString;
+  // make date display
   results.classList.add("show");
 }
 
 // on click
 submit[0].addEventListener("click", function(e) {
-  console.log("you clicked submit");
-  // stop page from reloading
   e.preventDefault();
   // check if given data is on the database
   getDataFromDb();
-  // make date display
 });
 
+function validatedName(name) {
+  var lowerCaseName = name.toLowerCase();
+  var validatedName = lowerCaseName.replace(/[\s]/g, "");
+  return validatedName;
+}
+
 function getDataFromDb() {
-  var name = nameInput.value;
+  var name = validatedName(nameInput.value);
   var birth = birthdateInput.value;
 
-  // load a url (to the correct route) with the information needed for the SQL query
-  var url = "/get-data?name=" + name + "&birth=" + birth;
-  // call the generic xhr request (set method, url and error handling when data comes back)
-  xhrRequest("GET", url, function(err, data) {
-    if (err) new Error();
-    // if the death date is empty...
-    if (data.length === 0) {
-      // call the random date function to make up a random date
-      var randomDate = makeRandomDate();
-      // ...and send the data to be added to the database
-      postDataToDb(randomDate);
+  if (name.length === 0) {
+    nameInput.value = "";
+    nameInput.placeholder = " add a name";
+    nameInput.style.backgroundColor = "#f7df3e";
+    nameInput.addEventListener("focus", function() {
+      this.style.backgroundColor = "transparent";
+      this.placeholder = "";
+    });
+  } else if (birth.length === 0) {
+    birthdateInput.style.backgroundColor = "#f7df3e";
+    birthdateInput.addEventListener("focus", function() {
+      this.style.backgroundColor = "transparent";
+    });
+  } else {
+    // load a url (to the correct route) with the information needed for the SQL query
+    var url = "/get-data?name=" + name + "&birth=" + birth;
+    // call the generic xhr request (set method, url and error handling when data comes back)
+    xhrRequest("GET", url, function(err, data) {
+      if (err) new Error();
+      // if the death date is empty...
+      if (data.length === 0) {
+        // call the random date function to make up a random date
+        var randomDate = makeRandomDate();
+        // ...and send the data to be added to the database
+        postDataToDb(randomDate);
 
-      // if the death date is in the datbase - render it!
-    } else {
-      renderDate(data[0].deathdate);
-    }
-  });
+        // if the death date is in the datbase - render it!
+      } else {
+        renderDate(data[0].deathdate);
+      }
+    });
+  }
 }
 
 function postDataToDb(randomDate) {
-  console.log("postDataToDb");
-  console.log("this is random date:", randomDate);
-  var name = nameInput.value;
+  var name = valitatedName(nameInput.value);
   var birth = birthdateInput.value;
   // set the deathvalue to be the random date
   deathdateInput.value = randomDate;
-
   // load a url (to the correct route) with the information needed for the SQL query
   var url =
     "/create-user?name=" + name + "&birth=" + birth + "&death=" + randomDate;

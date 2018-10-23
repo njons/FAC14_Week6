@@ -19,11 +19,11 @@
       <form method="POST" action="/create-user" id="details">
 
         <label for="name">What's your name?</label>
-        <input name="name" type="text" id="name"  value="" autofocus autocomplete="off"></input>
+        <input name="name" type="text" id="name"  value="" autocomplete="off" autofocus required>
 
         <label for="birth">When were you born?</label>
-        <input name="birth" type="date" id="birth" value=""></input>
-        <input name="death" type="hidden" id="death" value=""></input>
+        <input name="birth" type="date" id="birth" value="" pattern="[/d]" title="numbers only empty inputs" required>
+        <input name="death" type="hidden" id="death" value="">
 
         <button type="submit" form="details">Find out what date you will perish</button>
       </form>
