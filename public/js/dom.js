@@ -2,8 +2,7 @@
 var nameInput = document.getElementById("name");
 var birthdateInput = document.getElementById("birth");
 var deathdateInput = document.getElementById("death");
-var div = document.getElementsByTagName("div");
-var results = document.createElement("p");
+var results = document.getElementById("results");
 var submit = document.getElementsByTagName("button");
 
 // random number generator
@@ -85,15 +84,17 @@ function renderDate(date) {
 
   // create div displaying result
   results.innerText = dateString;
-  div[0].appendChild(results);
+  results.classList.add("show");
 }
 
 // on click
 submit[0].addEventListener("click", function(e) {
+  console.log("you clicked submit");
   // stop page from reloading
   e.preventDefault();
   // check if given data is on the database
   getDataFromDb();
+  // make date display
 });
 
 function getDataFromDb() {

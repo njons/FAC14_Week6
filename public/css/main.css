@@ -7,100 +7,108 @@
 }
 
 body {
-  height: 100vh;
   background: Cornsilk;
   font-family: "Playfair Display", serif;
-  font-size: 36px;
+  font-size: 32px;
   color: #1b1b26;
-  padding: 50px;
+  padding: 0 50px;
   display: flex;
   justify-content: center;
 }
 
 main {
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 760px;
 }
 
 img {
-  max-width: 60%;
+  max-width: 50%;
+  margin-top: 10px;
 }
 
-h1,
+h1 {
+  font-size: 40px;
+  margin: 20px 0 10px 0;
+}
+
+.show {
+  background-color: #f7df3e;
+  color: #1b1b26;
+}
+
 p {
-  font-size: 36px;
+  font-size: 40px;
+  margin: 10px 0 20px;
+  padding: 10px;
+  color: transparent;
 }
 
-h1,
-form,
-p,
-ul {
-  margin: auto;
+a {
+  text-decoration: none;
+  color: #1b1b26;
 }
 
 form {
   display: flex;
   flex-direction: column;
-  max-width: 650px;
-  padding-top: 50px;
+  width: calc(80vw - 100px);
 }
 
 label {
-  margin-top: 3%;
-  margin-bottom: 2%;
+  margin-top: 10px;
+  margin-bottom: 5px;
 }
 
 input {
   font-family: "Playfair Display", serif;
-  font-size: 36px;
+  font-size: 32px;
   color: black;
-  border: none;
   background-color: transparent;
-  border-bottom: 2px solid black;
   outline: none;
-  margin-bottom: 5%;
-}
-
-button,
-p {
-  background-color: #f7df3e;
-  padding: 10px 5px;
   border: none;
-  color: black;
+  border-bottom: 2px solid black;
+  margin-bottom: 10px;
 }
 
 button {
+  background-color: #f7df3e;
+  padding: 10px;
+  color: black;
   font-family: "Playfair Display", serif;
-  font-size: 36px;
-  background-color: transparent;
+  font-size: 32px;
   outline: none;
   border: none;
-  margin-top: 80px;
+  margin: 50px 0;
   transition: all 0.3s ease;
+  line-height: 1;
 }
 
 button:hover {
   cursor: pointer;
 }
 
-span {
-  background-color: #f7df3e;
-  padding: 0 5px 4px;
-  border: 1px solid currentColor;
-  border-radius: 3px;
-  display: inline-block;
-}
-
-span:hover {
-  border-color: transparent;
-  background-color: transparent;
-}
-
-li {
-  background-color: #f7df3e;
-  padding: 0 5px;
-  font-size: calc(1rem + 3vw);
+@media (max-width: 600px) {
+  body {
+    padding: 0 30px;
+    display: block;
+  }
+  h1,
+  form,
+  input,
+  button {
+    font-size: 24px;
+  }
+  form {
+    width: calc(100vw - 60px);
+  }
+  button {
+    margin: 20px 0;
+  }
+  p {
+    font-size: 32px;
+    margin: 10px 0 20px;
+    padding: 10px 0px;
+    text-align: center;
+  }
 }
