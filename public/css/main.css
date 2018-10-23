@@ -5,10 +5,12 @@
 body {
   height: 100vh;
   background: Cornsilk;
-  font-family: 'Playfair Display', serif;
-  font-size: calc(1rem + 2vw);
-  color: #1B1B26;
+  font-family: "Playfair Display", serif;
+  font-size: 36px;
+  color: #1b1b26;
   padding: 50px;
+  display: flex;
+  justify-content: center;
 }
 
 main {
@@ -16,6 +18,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 760px;
 }
 
 img {
@@ -24,7 +27,7 @@ img {
 
 h1,
 p {
-  font-size: calc(1rem + 3vw);
+  font-size: 36px;
 }
 
 h1,
@@ -37,7 +40,8 @@ ul {
 form {
   display: flex;
   flex-direction: column;
-  /* width: 70vw; */
+  max-width: 650px;
+  padding-top: 50px;
 }
 
 label {
@@ -45,26 +49,26 @@ label {
 }
 
 input {
-  font-family: 'Playfair Display', serif;
-  font-size: calc(1rem + 2vw);
+  font-family: "Playfair Display", serif;
+  font-size: 36px;
   color: black;
   border: none;
-  border-bottom: 2px solid black;
   background-color: transparent;
+  border-bottom: 2px solid black;
   outline: none;
   margin-top: 30px;
 }
 
 p {
-  background-color:#F7DF3E;
+  background-color: #f7df3e;
   padding: 10px 5px;
   border: none;
   color: black;
 }
 
 button {
-  font-family: 'Playfair Display', serif;
-  font-size: calc(1rem + 2vw);
+  font-family: "Playfair Display", serif;
+  font-size: 36px;
   background-color: transparent;
   outline: none;
   border: none;
@@ -76,7 +80,7 @@ button:hover {
 }
 
 span {
-  background-color:#F7DF3E;
+  background-color: #f7df3e;
   padding: 0 5px 4px;
   border: 1px solid currentColor;
   border-radius: 3px;
@@ -89,7 +93,7 @@ span:hover {
 }
 
 li {
-  background-color: #F7DF3E;
+  background-color: #f7df3e;
   padding: 0 5px;
   font-size: calc(1rem + 3vw);
 }
