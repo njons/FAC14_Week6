@@ -1,46 +1,32 @@
 //console.log('this is dom.js');
 var nameInput = document.getElementById("name");
 var birthdateInput = document.getElementById("birth");
+var deathdateInput = document.getElementById("death");
+var div = document.getElementsByTagName("div");
+var results = document.createElement("p");
+var submit = document.getElementsByTagName("button");
 
 // random number generator
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function getRandomDate() {
+// compile a random date for when a user doenst exist in the database
+function makeRandomDate() {
   var year = getRandomInt(2033, 2084);
-  var monthNum = getMonthWord(getRandomInt(01, 12));
-  var day = getRandomDay(monthNum);
-  renderDate("Your date is " + day + " " + month + " " + year);
+  var month = getRandomInt(01, 12);
+  var day = getRandomDay(month);
+  return year + "-" + month + "-" + day;
 }
 
-function getMonthWord(monthNum) {
-  const months = {
-    01: "January",
-    02: "February",
-    03: "March",
-    04: "April",
-    05: "May",
-    06: "June",
-    07: "July",
-    08: "August",
-    09: "September",
-    10: "October",
-    11: "November",
-    12: "December"
-  };
-  console.log(monthNum);
-  console.log(months[monthNum]);
-  return months[monthNum];
-}
-
+// create a random date based on the number of days of the month
 function getRandomDay(monthNum) {
-  if (monthNum === 02) {
+  if (monthNum === 2) {
     return getRandomInt(1, 28);
   } else if (
-    monthNum === 04 ||
-    monthNum === 06 ||
-    monthNum === 09 ||
+    monthNum === 4 ||
+    monthNum === 6 ||
+    monthNum === 9 ||
     monthNum === 11
   ) {
     return getRandomInt(1, 30);
@@ -49,23 +35,110 @@ function getRandomDay(monthNum) {
   }
 }
 
-function getDateString(date) {
-  console.log(date);
-  var year = date.split("-")[0];
-  console.log(year);
-  var month = getMonthWord(date.split("-")[1]);
-  console.log(month);
-  var day = date.split("-")[2];
-  console.log(day);
-  renderDate("Your date is " + day + " " + month + " " + year);
-  // console.log(dateString);
+// remove the '0' from all dates starting with zero
+function removeZero(num) {
+  if (num.slice(0, 1) === "0") {
+    return num.split("")[1];
+  } else {
+    return num;
+  }
 }
 
-// call the function that returns the full string
-// var dateString = getDateString();
-// var dateNum = getRandomDateNum();
+// turn the number of the month inot a word
+function getMonthWord(monthNum) {
+  const months = {
+    1: "January",
+    2: "February",
+    3: "March",
+    4: "April",
+    5: "May",
+    6: "June",
+    7: "July",
+    8: "August",
+    9: "September",
+    10: "October",
+    11: "November",
+    12: "December"
+  };
 
-function xhrRequest(url, cb) {
+  monthNum = removeZero(monthNum);
+  return months[monthNum];
+}
+
+// turns the converted timestap bits into a sentence
+function getDateString(year, month, day) {
+  var monthWord = getMonthWord(month);
+  var date = removeZero(day);
+  return "Your date is " + date + " " + monthWord + " " + year;
+}
+
+// render the date from the data in the database (will return as timestamp)
+function renderDate(date) {
+  console.log("this is date:", date);
+  results.innerText = "";
+
+  // clean up the timestamp to be a nice sentence
+  var year = date.split("-")[0];
+  var month = date.split("-")[1];
+  var day = date.split("-")[2];
+  var dateString = getDateString(year, month, day);
+
+  // create div displaying result
+  results.innerText = dateString;
+  div[0].appendChild(results);
+}
+
+// on click
+submit[0].addEventListener("click", function(e) {
+  // stop page from reloading
+  e.preventDefault();
+  // check if given data is on the database
+  getDataFromDb();
+});
+
+function getDataFromDb() {
+  var name = nameInput.value;
+  var birth = birthdateInput.value;
+
+  // load a url (to the correct route) with the information needed for the SQL query
+  var url = "/get-data?name=" + name + "&birth=" + birth;
+  // call the generic xhr request (set method, url and error handling when data comes back)
+  xhrRequest("GET", url, function(err, data) {
+    if (err) new Error();
+    // if the death date is empty...
+    if (data.length === 0) {
+      // call the random date function to make up a random date
+      var randomDate = makeRandomDate();
+      // ...and send the data to be added to the database
+      postDataToDb(randomDate);
+
+      // if the death date is in the datbase - render it!
+    } else {
+      renderDate(data[0].deathdate);
+    }
+  });
+}
+
+function postDataToDb(randomDate) {
+  console.log("postDataToDb");
+  console.log("this is random date:", randomDate);
+  var name = nameInput.value;
+  var birth = birthdateInput.value;
+  // set the deathvalue to be the random date
+  deathdateInput.value = randomDate;
+
+  // load a url (to the correct route) with the information needed for the SQL query
+  var url =
+    "/create-user?name=" + name + "&birth=" + birth + "&death=" + randomDate;
+  // call the generic xhr request (set method, url and error handling when data comes back)
+  xhrRequest("POST", url, function(err, data) {
+    if (err) new Error();
+    renderDate(data);
+  });
+}
+
+// generic xhr request (allow to set different methods and urls)
+function xhrRequest(method, url, cb) {
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function() {
     if (xhr.readyState === 4 && xhr.status === 200) {
@@ -76,45 +149,6 @@ function xhrRequest(url, cb) {
       cb("error" + xhr.responseType);
     }
   };
-  xhr.open("GET", url, true);
+  xhr.open(method, url, true);
   xhr.send();
-}
-
-// target the button
-const submit = document.getElementsByTagName("button");
-// on click
-submit[0].addEventListener("click", function(e) {
-  console.log("you clicked the button");
-  // stop page from reloading
-  e.preventDefault();
-  renderDate();
-  getDataFromDb();
-});
-
-function setValue(dateNum) {
-  const death = document.getElementById("death");
-  death.setAttribute("value", dateNum);
-  console.log(dateNum);
-}
-
-function renderDate(dateString) {
-  console.log(dateString);
-  // create div displaying result
-  const div = document.getElementsByTagName("div");
-  const results = document.createElement("p");
-  results.innerText = dateString;
-  div[0].appendChild(results);
-}
-
-function getDataFromDb() {
-  var name = nameInput.value;
-  var birth = birthdateInput.value;
-
-  var url = "/get-data?name=" + name + "&birth=" + birth;
-  xhrRequest(url, function(err, data) {
-    if (err) new Error();
-    console.log("this is data in the front:", data);
-    var date = data[0].deathdate;
-    getDateString(date);
-  });
 }

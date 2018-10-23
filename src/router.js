@@ -16,7 +16,7 @@ const router = (request, response) => {
   } else if (url.includes("/public/")) {
     publicFilesRoute(request, response, url);
   } else if (url.includes("/create-user")) {
-    postDataRoute(request, response);
+    postDataRoute(request, response, url);
   } else if (url.includes("/get-data")) {
     getDataRoute(request, response, url);
   } else {

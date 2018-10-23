@@ -2,6 +2,10 @@
 /* yellow: #F7DF3E */
 /* beige: #F1E2D0 */
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   height: 100vh;
   background: Cornsilk;
@@ -45,7 +49,8 @@ form {
 }
 
 label {
-  margin-top: 30px;
+  margin-top: 3%;
+  margin-bottom: 2%;
 }
 
 input {
@@ -56,9 +61,10 @@ input {
   background-color: transparent;
   border-bottom: 2px solid black;
   outline: none;
-  margin-top: 30px;
+  margin-bottom: 5%;
 }
 
+button,
 p {
   background-color: #f7df3e;
   padding: 10px 5px;
@@ -73,6 +79,7 @@ button {
   outline: none;
   border: none;
   margin-top: 80px;
+  transition: all 0.3s ease;
 }
 
 button:hover {

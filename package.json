@@ -4,7 +4,7 @@
   "description": "week 6: database requests",
   "main": "src/server.js",
   "scripts": {
-    "test": "nyc tape test/*.js | tap-spec",
+    "test": "NODE_ENV=test nyc tape test/*.js | tap-spec",
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "start": "nodemon ./src/server.js"
   },
